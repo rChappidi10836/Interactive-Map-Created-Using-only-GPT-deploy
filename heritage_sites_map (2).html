@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b5f508a98b599ed9cdee724d12a15fba {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 10px; right: 10px; 
+                width: 200px; height: 150px; 
+                background-color: white; 
+                opacity: 0.8; 
+                border-radius: 10px;
+                padding: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                z-index: 1000;"> <!-- Added z-index to ensure visibility -->
+        <h4 style="text-align: center; margin-bottom: 5px;">Rank Legend</h4>
+        <ul style="list-style-type: none; padding: 0; font-size: 14px;">
+            <li><span style="background-color: red; padding: 5px; margin: 2px; border-radius: 5px;"></span> Rank 1-5</li>
+            <li><span style="background-color: orange; padding: 5px; margin: 2px; border-radius: 5px;"></span> Rank 6-10</li>
+            <li><span style="background-color: green; padding: 5px; margin: 2px; border-radius: 5px;"></span> Rank 11-15</li>
+            <li><span style="background-color: blue; padding: 5px; margin: 2px; border-radius: 5px;"></span> Rank 16-20</li>
+        </ul>
+    </div>
+    
+            <div class="folium-map" id="map_b5f508a98b599ed9cdee724d12a15fba" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b5f508a98b599ed9cdee724d12a15fba = L.map(
+                "map_b5f508a98b599ed9cdee724d12a15fba",
+                {
+                    center: [26.87231, 20.223405],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "maxBounds": [
+[
+-90,
+-180,
+],
+[
+90,
+180,
+],
+],
+  "zoom": 2,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "worldCopyJump": true,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d44e1b1da7f6efe0fa22c6dd15114788 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 2,
+  "maxZoom": 10,
+  "maxNativeZoom": 10,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_d44e1b1da7f6efe0fa22c6dd15114788.addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var tile_layer_1c288e651889be54a1b59b0a6ab93cb4 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1c288e651889be54a1b59b0a6ab93cb4.addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var marker_80f5597a0127b7627294038fedb6ee37 = L.marker(
+                [39.9, 116.3],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_3670723190c17384edfdc2ae4dd5b565 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_80f5597a0127b7627294038fedb6ee37.setIcon(icon_3670723190c17384edfdc2ae4dd5b565);
+        
+    
+        var popup_aeb22117cab8ed04cd913d2d2e9f7a21 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2ec13ade9927a44ffe4320c62ebb337c = $(`<div id="html_2ec13ade9927a44ffe4320c62ebb337c" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Great Wall of China<br>     <strong>Local Name:</strong> (长城)<br>     <strong>City:</strong> Beijing<br>     <strong>Country:</strong> China<br>     <strong>Rank:</strong> 1<br>     <strong>Visitors:</strong> 10.0 million     </div>     </div>`)[0];
+                popup_aeb22117cab8ed04cd913d2d2e9f7a21.setContent(html_2ec13ade9927a44ffe4320c62ebb337c);
+            
+        
+
+        marker_80f5597a0127b7627294038fedb6ee37.bindPopup(popup_aeb22117cab8ed04cd913d2d2e9f7a21)
+        ;
+
+        
+    
+    
+            var marker_07ea6b2e69039600299b324d46743b3c = L.marker(
+                [48.858, 2.294],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_5e1f89380a940bbd0183622aa1dc9f02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_07ea6b2e69039600299b324d46743b3c.setIcon(icon_5e1f89380a940bbd0183622aa1dc9f02);
+        
+    
+        var popup_b225379c2b221156edc964dc6b5efc8d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1ae7768e758aff2c8f9c9fc18cf4609e = $(`<div id="html_1ae7768e758aff2c8f9c9fc18cf4609e" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Eiffel Tower<br>     <strong>Local Name:</strong> (Tour Eiffel)<br>     <strong>City:</strong> Paris<br>     <strong>Country:</strong> France<br>     <strong>Rank:</strong> 2<br>     <strong>Visitors:</strong> 7.0 million     </div>     </div>`)[0];
+                popup_b225379c2b221156edc964dc6b5efc8d.setContent(html_1ae7768e758aff2c8f9c9fc18cf4609e);
+            
+        
+
+        marker_07ea6b2e69039600299b324d46743b3c.bindPopup(popup_b225379c2b221156edc964dc6b5efc8d)
+        ;
+
+        
+    
+    
+            var marker_d29b67d2bb5b7fd064de30790bf6df61 = L.marker(
+                [-13.163, -72.545],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_4fc5b72f6b852864ef944efd37b6d3ab = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d29b67d2bb5b7fd064de30790bf6df61.setIcon(icon_4fc5b72f6b852864ef944efd37b6d3ab);
+        
+    
+        var popup_36faad1cf49feff3c8a7c62c9cf00df0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_972d32d30d83a478ecde47f588d5c016 = $(`<div id="html_972d32d30d83a478ecde47f588d5c016" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Machu Picchu<br>     <strong>Local Name:</strong> (Machu Picchu)<br>     <strong>City:</strong> Cusco<br>     <strong>Country:</strong> Peru<br>     <strong>Rank:</strong> 3<br>     <strong>Visitors:</strong> 6.0 million     </div>     </div>`)[0];
+                popup_36faad1cf49feff3c8a7c62c9cf00df0.setContent(html_972d32d30d83a478ecde47f588d5c016);
+            
+        
+
+        marker_d29b67d2bb5b7fd064de30790bf6df61.bindPopup(popup_36faad1cf49feff3c8a7c62c9cf00df0)
+        ;
+
+        
+    
+    
+            var marker_5337b167341a988ab52dc24629489778 = L.marker(
+                [27.175, 78.042],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_0f3408173dbc3d9ba819f73b99945eb1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5337b167341a988ab52dc24629489778.setIcon(icon_0f3408173dbc3d9ba819f73b99945eb1);
+        
+    
+        var popup_ae44182dd8667abdd0ca757e4c47806a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f39f800233cfd9187f21c8366b5a3870 = $(`<div id="html_f39f800233cfd9187f21c8366b5a3870" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Taj Mahal<br>     <strong>Local Name:</strong> (ताज महल)<br>     <strong>City:</strong> Agra<br>     <strong>Country:</strong> India<br>     <strong>Rank:</strong> 4<br>     <strong>Visitors:</strong> 8.0 million     </div>     </div>`)[0];
+                popup_ae44182dd8667abdd0ca757e4c47806a.setContent(html_f39f800233cfd9187f21c8366b5a3870);
+            
+        
+
+        marker_5337b167341a988ab52dc24629489778.bindPopup(popup_ae44182dd8667abdd0ca757e4c47806a)
+        ;
+
+        
+    
+    
+            var marker_abecbff7f566063ce236e3bf4af6928c = L.marker(
+                [41.8902, 12.4922],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_0b45fcdcda6e8ba98d2c8998da0e1836 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_abecbff7f566063ce236e3bf4af6928c.setIcon(icon_0b45fcdcda6e8ba98d2c8998da0e1836);
+        
+    
+        var popup_24828d3a870ff342f301abd430e527c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8ecc6ef9c6820c7ad16531d82bfd87f3 = $(`<div id="html_8ecc6ef9c6820c7ad16531d82bfd87f3" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Colosseum<br>     <strong>Local Name:</strong> (Colosseo)<br>     <strong>City:</strong> Rome<br>     <strong>Country:</strong> Italy<br>     <strong>Rank:</strong> 5<br>     <strong>Visitors:</strong> 5.0 million     </div>     </div>`)[0];
+                popup_24828d3a870ff342f301abd430e527c8.setContent(html_8ecc6ef9c6820c7ad16531d82bfd87f3);
+            
+        
+
+        marker_abecbff7f566063ce236e3bf4af6928c.bindPopup(popup_24828d3a870ff342f301abd430e527c8)
+        ;
+
+        
+    
+    
+            var marker_02c520dd69e564411a3ba7f5a12473eb = L.marker(
+                [40.6892, -74.0445],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_bdf423a1b7b15b306310cc38f8a5a023 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_02c520dd69e564411a3ba7f5a12473eb.setIcon(icon_bdf423a1b7b15b306310cc38f8a5a023);
+        
+    
+        var popup_411936e77037a92007145e2626adc6e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_146c969a55e311e5189d9e35ca0f3662 = $(`<div id="html_146c969a55e311e5189d9e35ca0f3662" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Statue of Liberty<br>     <strong>Local Name:</strong> (Statue of Liberty)<br>     <strong>City:</strong> New York<br>     <strong>Country:</strong> USA<br>     <strong>Rank:</strong> 6<br>     <strong>Visitors:</strong> 4.5 million     </div>     </div>`)[0];
+                popup_411936e77037a92007145e2626adc6e7.setContent(html_146c969a55e311e5189d9e35ca0f3662);
+            
+        
+
+        marker_02c520dd69e564411a3ba7f5a12473eb.bindPopup(popup_411936e77037a92007145e2626adc6e7)
+        ;
+
+        
+    
+    
+            var marker_31fa2b57d5eb0d3c6625c5b97a6b5821 = L.marker(
+                [29.9792, 31.1342],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_fc67e57e34f857860e169ae8293fbdce = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_31fa2b57d5eb0d3c6625c5b97a6b5821.setIcon(icon_fc67e57e34f857860e169ae8293fbdce);
+        
+    
+        var popup_dcdeb99c3ce867bd76a3ba936834619c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4e5f1bae1fae98ed0bdf699eb527cfcc = $(`<div id="html_4e5f1bae1fae98ed0bdf699eb527cfcc" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Pyramids of Giza<br>     <strong>Local Name:</strong> (أهرامات الجيزة)<br>     <strong>City:</strong> Giza<br>     <strong>Country:</strong> Egypt<br>     <strong>Rank:</strong> 7<br>     <strong>Visitors:</strong> 4.0 million     </div>     </div>`)[0];
+                popup_dcdeb99c3ce867bd76a3ba936834619c.setContent(html_4e5f1bae1fae98ed0bdf699eb527cfcc);
+            
+        
+
+        marker_31fa2b57d5eb0d3c6625c5b97a6b5821.bindPopup(popup_dcdeb99c3ce867bd76a3ba936834619c)
+        ;
+
+        
+    
+    
+            var marker_2cbe4b2a8e4d3b54c60d888485a972f6 = L.marker(
+                [37.9715, 23.7267],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_71932cb40163354429826ac80e4c4c3b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2cbe4b2a8e4d3b54c60d888485a972f6.setIcon(icon_71932cb40163354429826ac80e4c4c3b);
+        
+    
+        var popup_a84f29defac9eea96f60e50bccf52282 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_84fd4ea445180786b21befe2b2b0e1a1 = $(`<div id="html_84fd4ea445180786b21befe2b2b0e1a1" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Acropolis<br>     <strong>Local Name:</strong> (Ακρόπολη)<br>     <strong>City:</strong> Athens<br>     <strong>Country:</strong> Greece<br>     <strong>Rank:</strong> 8<br>     <strong>Visitors:</strong> 3.5 million     </div>     </div>`)[0];
+                popup_a84f29defac9eea96f60e50bccf52282.setContent(html_84fd4ea445180786b21befe2b2b0e1a1);
+            
+        
+
+        marker_2cbe4b2a8e4d3b54c60d888485a972f6.bindPopup(popup_a84f29defac9eea96f60e50bccf52282)
+        ;
+
+        
+    
+    
+            var marker_3cca0f6ebf1bb773a2ae0c1eacb82d7d = L.marker(
+                [51.1789, -1.8262],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_e09d27ab9787ea779bb13d87a26dc64b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3cca0f6ebf1bb773a2ae0c1eacb82d7d.setIcon(icon_e09d27ab9787ea779bb13d87a26dc64b);
+        
+    
+        var popup_6160854ce9a1214e3e13c695de3ed2f1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3f7a3425d66ae3f4b50fa981a734e40e = $(`<div id="html_3f7a3425d66ae3f4b50fa981a734e40e" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Stonehenge<br>     <strong>Local Name:</strong> (Stonehenge)<br>     <strong>City:</strong> Wiltshire<br>     <strong>Country:</strong> UK<br>     <strong>Rank:</strong> 9<br>     <strong>Visitors:</strong> 3.0 million     </div>     </div>`)[0];
+                popup_6160854ce9a1214e3e13c695de3ed2f1.setContent(html_3f7a3425d66ae3f4b50fa981a734e40e);
+            
+        
+
+        marker_3cca0f6ebf1bb773a2ae0c1eacb82d7d.bindPopup(popup_6160854ce9a1214e3e13c695de3ed2f1)
+        ;
+
+        
+    
+    
+            var marker_aeeb303e76d3a859893872e1507bd2d0 = L.marker(
+                [13.4125, 103.8667],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_e333362a2fa6e710734166d9d1b40c37 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_aeeb303e76d3a859893872e1507bd2d0.setIcon(icon_e333362a2fa6e710734166d9d1b40c37);
+        
+    
+        var popup_ec7fdc5a0750624f6cabf048726939e9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e8010fdf5791ddc70a42f8e433add5de = $(`<div id="html_e8010fdf5791ddc70a42f8e433add5de" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Angkor Wat<br>     <strong>Local Name:</strong> (អង្គរវត្ត)<br>     <strong>City:</strong> Siem Reap<br>     <strong>Country:</strong> Cambodia<br>     <strong>Rank:</strong> 10<br>     <strong>Visitors:</strong> 2.8 million     </div>     </div>`)[0];
+                popup_ec7fdc5a0750624f6cabf048726939e9.setContent(html_e8010fdf5791ddc70a42f8e433add5de);
+            
+        
+
+        marker_aeeb303e76d3a859893872e1507bd2d0.bindPopup(popup_ec7fdc5a0750624f6cabf048726939e9)
+        ;
+
+        
+    
+    
+            var marker_eaa2cb10512d53bab48eef7464267915 = L.marker(
+                [30.3285, 35.4444],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_37a300469c078a497b19fa209b86c3d8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_eaa2cb10512d53bab48eef7464267915.setIcon(icon_37a300469c078a497b19fa209b86c3d8);
+        
+    
+        var popup_8c7b85c6fd6e90d0a13b20b2c4f7a9d3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a23faa5eb957573ecf0cd8a3959a81ea = $(`<div id="html_a23faa5eb957573ecf0cd8a3959a81ea" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Petra<br>     <strong>Local Name:</strong> (البتراء)<br>     <strong>City:</strong> Ma'an<br>     <strong>Country:</strong> Jordan<br>     <strong>Rank:</strong> 11<br>     <strong>Visitors:</strong> 2.5 million     </div>     </div>`)[0];
+                popup_8c7b85c6fd6e90d0a13b20b2c4f7a9d3.setContent(html_a23faa5eb957573ecf0cd8a3959a81ea);
+            
+        
+
+        marker_eaa2cb10512d53bab48eef7464267915.bindPopup(popup_8c7b85c6fd6e90d0a13b20b2c4f7a9d3)
+        ;
+
+        
+    
+    
+            var marker_4e1336e73f50c79dc465e35f59c430aa = L.marker(
+                [-33.8568, 151.2153],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_571cc8c21570e1d9840bc6bca7d42418 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4e1336e73f50c79dc465e35f59c430aa.setIcon(icon_571cc8c21570e1d9840bc6bca7d42418);
+        
+    
+        var popup_196360a6a57264269a5f7cd806705c3c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b02b7736b4127c2fa7f51a1cdc7b3c38 = $(`<div id="html_b02b7736b4127c2fa7f51a1cdc7b3c38" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Sydney Opera House<br>     <strong>Local Name:</strong> (Sydney Opera House)<br>     <strong>City:</strong> Sydney<br>     <strong>Country:</strong> Australia<br>     <strong>Rank:</strong> 12<br>     <strong>Visitors:</strong> 2.3 million     </div>     </div>`)[0];
+                popup_196360a6a57264269a5f7cd806705c3c.setContent(html_b02b7736b4127c2fa7f51a1cdc7b3c38);
+            
+        
+
+        marker_4e1336e73f50c79dc465e35f59c430aa.bindPopup(popup_196360a6a57264269a5f7cd806705c3c)
+        ;
+
+        
+    
+    
+            var marker_3557686662476dbcea9c5bc5a624dd4c = L.marker(
+                [37.176, -3.5881],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_7c9566ee0b3d0182cf8354b1aaa725bf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_3557686662476dbcea9c5bc5a624dd4c.setIcon(icon_7c9566ee0b3d0182cf8354b1aaa725bf);
+        
+    
+        var popup_c18b267a3efa54e958b2cc5225666f06 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8c1e00b2e3001897eba23b2eb8a4030d = $(`<div id="html_8c1e00b2e3001897eba23b2eb8a4030d" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Alhambra<br>     <strong>Local Name:</strong> (Alhambra)<br>     <strong>City:</strong> Granada<br>     <strong>Country:</strong> Spain<br>     <strong>Rank:</strong> 13<br>     <strong>Visitors:</strong> 2.1 million     </div>     </div>`)[0];
+                popup_c18b267a3efa54e958b2cc5225666f06.setContent(html_8c1e00b2e3001897eba23b2eb8a4030d);
+            
+        
+
+        marker_3557686662476dbcea9c5bc5a624dd4c.bindPopup(popup_c18b267a3efa54e958b2cc5225666f06)
+        ;
+
+        
+    
+    
+            var marker_c84c7be8a21d4fcf54aac4ad00f48c1b = L.marker(
+                [48.8049, 2.1204],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_0bd283b9b5e2feef5d7f9606589ca84d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c84c7be8a21d4fcf54aac4ad00f48c1b.setIcon(icon_0bd283b9b5e2feef5d7f9606589ca84d);
+        
+    
+        var popup_a361b3de7ab3c24a9553f95eb26ce82e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_35d8f6913ffe01daea32c7119610b1ea = $(`<div id="html_35d8f6913ffe01daea32c7119610b1ea" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Versailles Palace<br>     <strong>Local Name:</strong> (Château de Versailles)<br>     <strong>City:</strong> Versailles<br>     <strong>Country:</strong> France<br>     <strong>Rank:</strong> 14<br>     <strong>Visitors:</strong> 2.0 million     </div>     </div>`)[0];
+                popup_a361b3de7ab3c24a9553f95eb26ce82e.setContent(html_35d8f6913ffe01daea32c7119610b1ea);
+            
+        
+
+        marker_c84c7be8a21d4fcf54aac4ad00f48c1b.bindPopup(popup_a361b3de7ab3c24a9553f95eb26ce82e)
+        ;
+
+        
+    
+    
+            var marker_b7ad9524be144868bee260a0998fa532 = L.marker(
+                [39.9163, 116.3972],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_4dea20d4f09e7af3e57121001cb5a229 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b7ad9524be144868bee260a0998fa532.setIcon(icon_4dea20d4f09e7af3e57121001cb5a229);
+        
+    
+        var popup_965fa7688aad51c18fdd3708921a3ab5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9acd4e1cb6bdb6d9f323e30258fe0591 = $(`<div id="html_9acd4e1cb6bdb6d9f323e30258fe0591" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Forbidden City<br>     <strong>Local Name:</strong> (故宫)<br>     <strong>City:</strong> Beijing<br>     <strong>Country:</strong> China<br>     <strong>Rank:</strong> 15<br>     <strong>Visitors:</strong> 1.9 million     </div>     </div>`)[0];
+                popup_965fa7688aad51c18fdd3708921a3ab5.setContent(html_9acd4e1cb6bdb6d9f323e30258fe0591);
+            
+        
+
+        marker_b7ad9524be144868bee260a0998fa532.bindPopup(popup_965fa7688aad51c18fdd3708921a3ab5)
+        ;
+
+        
+    
+    
+            var marker_122172efe2b397f174b447cf0e19ed08 = L.marker(
+                [20.6843, -88.5678],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_af88ba4e9ebfd560b3ad513d0474aa2f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_122172efe2b397f174b447cf0e19ed08.setIcon(icon_af88ba4e9ebfd560b3ad513d0474aa2f);
+        
+    
+        var popup_507bc6c7aecf04f9900de90a450d045a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5bc8891af26b532e184f6490cfca5afe = $(`<div id="html_5bc8891af26b532e184f6490cfca5afe" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Chichen Itza<br>     <strong>Local Name:</strong> (Chichén Itzá)<br>     <strong>City:</strong> Yucatán<br>     <strong>Country:</strong> Mexico<br>     <strong>Rank:</strong> 16<br>     <strong>Visitors:</strong> 1.8 million     </div>     </div>`)[0];
+                popup_507bc6c7aecf04f9900de90a450d045a.setContent(html_5bc8891af26b532e184f6490cfca5afe);
+            
+        
+
+        marker_122172efe2b397f174b447cf0e19ed08.bindPopup(popup_507bc6c7aecf04f9900de90a450d045a)
+        ;
+
+        
+    
+    
+            var marker_9f59eb83e345f81913d2a1a89372a62f = L.marker(
+                [35.3606, 138.7274],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_4ccc9a412dfbf0ab0dc110bf752b4f60 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9f59eb83e345f81913d2a1a89372a62f.setIcon(icon_4ccc9a412dfbf0ab0dc110bf752b4f60);
+        
+    
+        var popup_5d0ef6e229016249728f0a13caa49f62 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1fdc940fd9a968480751ef59a862e980 = $(`<div id="html_1fdc940fd9a968480751ef59a862e980" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Mount Fuji<br>     <strong>Local Name:</strong> (富士山)<br>     <strong>City:</strong> Honshu<br>     <strong>Country:</strong> Japan<br>     <strong>Rank:</strong> 17<br>     <strong>Visitors:</strong> 1.7 million     </div>     </div>`)[0];
+                popup_5d0ef6e229016249728f0a13caa49f62.setContent(html_1fdc940fd9a968480751ef59a862e980);
+            
+        
+
+        marker_9f59eb83e345f81913d2a1a89372a62f.bindPopup(popup_5d0ef6e229016249728f0a13caa49f62)
+        ;
+
+        
+    
+    
+            var marker_2b18b04ad8f0e4760df5d933957cc875 = L.marker(
+                [-0.9538, -90.9656],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_2bbd8c6030af7569aefb10cf327cac02 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2b18b04ad8f0e4760df5d933957cc875.setIcon(icon_2bbd8c6030af7569aefb10cf327cac02);
+        
+    
+        var popup_b822902817c1ee374dd410dd5bd5d500 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0ac0056b482de262403c979cff669dd9 = $(`<div id="html_0ac0056b482de262403c979cff669dd9" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Galápagos Islands<br>     <strong>Local Name:</strong> (Islas Galápagos)<br>     <strong>City:</strong> Galápagos<br>     <strong>Country:</strong> Ecuador<br>     <strong>Rank:</strong> 18<br>     <strong>Visitors:</strong> 1.6 million     </div>     </div>`)[0];
+                popup_b822902817c1ee374dd410dd5bd5d500.setContent(html_0ac0056b482de262403c979cff669dd9);
+            
+        
+
+        marker_2b18b04ad8f0e4760df5d933957cc875.bindPopup(popup_b822902817c1ee374dd410dd5bd5d500)
+        ;
+
+        
+    
+    
+            var marker_2d3cb0616b3dcbee1ee8cd9c5dc38848 = L.marker(
+                [44.428, -110.5885],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_f80558ffef7570200b157721c8be59f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_2d3cb0616b3dcbee1ee8cd9c5dc38848.setIcon(icon_f80558ffef7570200b157721c8be59f9);
+        
+    
+        var popup_bb7c124129794f8fdb53ad83416eed40 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_105eb0ccc21fab733f36f9e676f3f573 = $(`<div id="html_105eb0ccc21fab733f36f9e676f3f573" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Yellowstone National Park<br>     <strong>Local Name:</strong> (Yellowstone National Park)<br>     <strong>City:</strong> Wyoming<br>     <strong>Country:</strong> USA<br>     <strong>Rank:</strong> 19<br>     <strong>Visitors:</strong> 1.5 million     </div>     </div>`)[0];
+                popup_bb7c124129794f8fdb53ad83416eed40.setContent(html_105eb0ccc21fab733f36f9e676f3f573);
+            
+        
+
+        marker_2d3cb0616b3dcbee1ee8cd9c5dc38848.bindPopup(popup_bb7c124129794f8fdb53ad83416eed40)
+        ;
+
+        
+    
+    
+            var marker_b8c3becde7413a35c7e30b587dc20793 = L.marker(
+                [-2.3333, 34.8333],
+                {
+}
+            ).addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            var icon_c45d58dd3d6765e4b31c8a075e14f1b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b8c3becde7413a35c7e30b587dc20793.setIcon(icon_c45d58dd3d6765e4b31c8a075e14f1b9);
+        
+    
+        var popup_6c0c038e31035ada4a4dde73e4729efc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_aa37c3fd3d7db8ec86e90cd6b7349b74 = $(`<div id="html_aa37c3fd3d7db8ec86e90cd6b7349b74" style="width: 100.0%; height: 100.0%;">      <div style="min-width: 150px; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">  <!-- Increase the width here -->     <strong>Name:</strong> Serengeti National Park<br>     <strong>Local Name:</strong> (Hifadhi ya Serengeti)<br>     <strong>City:</strong> Mara<br>     <strong>Country:</strong> Tanzania<br>     <strong>Rank:</strong> 20<br>     <strong>Visitors:</strong> 1.4 million     </div>     </div>`)[0];
+                popup_6c0c038e31035ada4a4dde73e4729efc.setContent(html_aa37c3fd3d7db8ec86e90cd6b7349b74);
+            
+        
+
+        marker_b8c3becde7413a35c7e30b587dc20793.bindPopup(popup_6c0c038e31035ada4a4dde73e4729efc)
+        ;
+
+        
+    
+    
+            tile_layer_d44e1b1da7f6efe0fa22c6dd15114788.addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+    
+            tile_layer_1c288e651889be54a1b59b0a6ab93cb4.addTo(map_b5f508a98b599ed9cdee724d12a15fba);
+        
+</script>
+</html>
